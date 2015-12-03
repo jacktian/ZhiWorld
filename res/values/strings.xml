@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">知天下</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="action_settings">Settings</string>
+    <!-- reside item -->
+    <string name="reside_main">主页</string>
+    <string name="reside_pics">图片</string>
+    <string name="reside_video">视频</string>
+    <string name="reside_weather">天气</string>
+
+</resources>
