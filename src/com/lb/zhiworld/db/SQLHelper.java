@@ -13,11 +13,15 @@ public class SQLHelper extends SQLiteOpenHelper {
 	public static final String CHANNEL_ORDERID = "orderId";
 	public static final String CHANNEL_SELECTED = "selected";
 
-	// private final Context context;
+	private final Context context;
 
 	public SQLHelper(Context context) {
 		super(context, DB_NAME, null, VERSION);
-		// this.context = context;
+		this.context = context;
+	}
+
+	public Context getContext() {
+		return context;
 	}
 
 	@Override

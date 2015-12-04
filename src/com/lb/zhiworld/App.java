@@ -32,7 +32,7 @@ public class App extends Application {
 	}
 
 	/* 获取Application */
-	public static Application getInstance() {
+	public static App getInstance() {
 		return application;
 	}
 

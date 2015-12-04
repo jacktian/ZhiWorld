@@ -4,5 +4,15 @@
     <color name="transparent">#00000000</color>
     <color name="white">#ffffffff</color>
     <color name="black">#ff000000</color>
+    <color name="under_line_bg">#ffdddddd</color>
+    <!-- title bar -->
+    <color name="main_red">#ffcc3131</color>
+    <!-- common button -->
+    <color name="btn_light_blue">#7fffffff</color>
+    <!-- common title -->
+    <color name="detail_title_text_color">#ff999999</color>
+    <!-- page view -->
+    <color name="activity_bg_color">#fff5f5f5</color>
+    <color name="column_bg">#fff3f3f3</color>
 
 </resources>

@@ -9,5 +9,8 @@
     <string name="reside_pics">图片</string>
     <string name="reside_video">视频</string>
     <string name="reside_weather">天气</string>
+    <!-- page title -->
+    <string name="news_express">新闻速递</string>
+    <string name="pic_news">图片新闻</string>
 
 </resources>
