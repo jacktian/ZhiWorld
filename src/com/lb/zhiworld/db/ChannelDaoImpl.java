@@ -5,11 +5,13 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 import android.annotation.SuppressLint;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+
 import com.lb.zhiworld.bean.ChannelItem;
 
 @SuppressLint("DefaultLocale")
@@ -164,7 +166,6 @@ public class ChannelDaoImpl implements ChannelDao {
 				list.add(map);
 			}
 			db.setTransactionSuccessful();
-			System.out.println("++++++++++++++++++++" + list);
 			return list;
 		} catch (Exception e) {
 		} finally {
@@ -234,15 +235,15 @@ public class ChannelDaoImpl implements ChannelDao {
 						String fieldName = mName.substring(3, mName.length())
 								.toLowerCase();
 						Object value = method.invoke(channelItem, null);
-						if (value instanceof String) {
-							values.put(fieldName, (String) value);
-						}
+						// if (value instanceof String) {
+						values.put(fieldName, "" + value);
+						// }
 					}
 				}
 				ret = db.insert(tableName, null, values);
-				if (ret <= 0) {
-					return;
-				}
+				// if (ret <= 0) {
+				// return;
+				// }
 			}
 			db.setTransactionSuccessful();
 		} catch (Exception e) {

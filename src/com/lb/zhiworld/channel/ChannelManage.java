@@ -59,7 +59,6 @@ public class ChannelManage {
 		if (channelDaoImpl == null) {
 			channelDaoImpl = new ChannelDaoImpl(sqlHelper.getContext());
 			Integer counts = channelDaoImpl.getChannelItemCounts();
-			System.out.println("-=-=-=-=-=-=-" + counts);
 			if (counts == null || counts <= 0) {
 				putChannelToDB();
 			}

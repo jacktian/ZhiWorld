@@ -69,6 +69,7 @@ public class MainFragment extends Fragment {
 		try {
 			userChannelList = ChannelManage.getInstance(
 					App.getInstance().getSQLHelper()).getUserChannel();
+			System.out.println("-------->" + userChannelList);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -55,4 +55,10 @@ public class ChannelItem extends BaseModle {
 		this.selected = selected;
 	}
 
+	@Override
+	public String toString() {
+		return "ChannelItem [id=" + id + ", name=" + name + ", orderId="
+				+ orderId + ", selected=" + selected + "]";
+	}
+
 }
