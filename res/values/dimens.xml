@@ -22,5 +22,7 @@
     <dimen name="title_text_margin">50.0dp</dimen>
     <!-- local button -->
     <dimen name="local_btn_padding">10.0dp</dimen>
+    <!-- news category column -->
+    <dimen name="category_column_item_radius">2.0dp</dimen>
 
 </resources>

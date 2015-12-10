@@ -14,5 +14,7 @@
     <!-- page view -->
     <color name="activity_bg_color">#fff5f5f5</color>
     <color name="column_bg">#fff3f3f3</color>
+    <!-- news category text -->
+    <color name="news_category_text">#ff909090</color>
 
 </resources>

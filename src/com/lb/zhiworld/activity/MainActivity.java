@@ -36,6 +36,7 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 		changeFragment(new MainFragment_());
 	}
 
+	@SuppressWarnings("deprecation")
 	private void setUpMenu() {
 		resideMenu = new ResideMenu(mContext);
 		resideMenu.setBackground(R.drawable.pc_menu_bg);
@@ -102,5 +103,9 @@ public class MainActivity extends BaseActivity implements View.OnClickListener {
 			changeFragment(new WeatherFragment_());
 		}
 		resideMenu.closeMenu();
+	}
+
+	public ResideMenu getResideMenu() {
+		return resideMenu;
 	}
 }

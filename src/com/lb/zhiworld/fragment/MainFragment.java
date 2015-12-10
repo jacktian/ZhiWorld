@@ -8,20 +8,25 @@ import org.androidannotations.annotations.AfterViews;
 import org.androidannotations.annotations.EFragment;
 import org.androidannotations.annotations.ViewById;
 
-import com.lb.zhiworld.App;
-import com.lb.zhiworld.R;
-import com.lb.zhiworld.bean.ChannelItem;
-import com.lb.zhiworld.channel.ChannelManage;
-import com.lb.zhiworld.db.ChannelUtils;
-import com.lb.zhiworld.utils.BaseTools;
-import com.lb.zhiworld.widget.ColumnHorizontalScrollView;
-
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.view.Gravity;
+import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.LinearLayout.LayoutParams;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+
+import com.lb.zhiworld.App;
+import com.lb.zhiworld.R;
+import com.lb.zhiworld.activity.MainActivity_;
+import com.lb.zhiworld.bean.ChannelItem;
+import com.lb.zhiworld.channel.ChannelManage;
+import com.lb.zhiworld.utils.BaseTools;
+import com.lb.zhiworld.widget.ColumnHorizontalScrollView;
+import com.special.ResideMenu.ResideMenu;
 
 @EFragment(R.layout.fragment_main)
 public class MainFragment extends Fragment {
@@ -62,16 +67,80 @@ public class MainFragment extends Fragment {
 
 	@AfterViews
 	void initView() {
+		disableCategoryScrollReside();
 		initColumns();
 	}
 
+	@SuppressWarnings("deprecation")
 	private void initColumns() {
 		try {
 			userChannelList = ChannelManage.getInstance(
 					App.getInstance().getSQLHelper()).getUserChannel();
-			System.out.println("-------->" + userChannelList);
+			mColumnChoose.removeAllViews();
+			int count = userChannelList.size();
+			mColumnHorizontalScrollView.setParam(getActivity(), mScreenWidth,
+					mColumnChoose, leftShadow, rightShadow, addMoreColumns,
+					channelColumn);
+			for (int i = 0; i < count; i++) {
+				LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(
+						mItemWidth, LayoutParams.WRAP_CONTENT);
+				params.leftMargin = 5;
+				params.rightMargin = 5;
+				TextView columnTextView = new TextView(getActivity());
+				columnTextView.setTextAppearance(getActivity(),
+						R.style.news_category_column_item_text);
+				columnTextView.setBackgroundResource(R.drawable.radio_btn_bg);
+				columnTextView.setGravity(Gravity.CENTER);
+				columnTextView.setPadding(5, 5, 5, 5);
+				columnTextView.setId(i);
+				columnTextView.setText(userChannelList.get(i).getName());
+				columnTextView.setTextColor(getActivity().getResources()
+						.getColorStateList(R.color.news_category_scroll_text));
+				if (currentSelectedColumn == i) {
+					columnTextView.setSelected(true);
+				}
+				columnTextView.setOnClickListener(new View.OnClickListener() {
+
+					@Override
+					public void onClick(View v) {
+						for (int i = 0; i < mColumnChoose.getChildCount(); i++) {
+							if (mColumnChoose.getChildAt(i) != v) {
+								mColumnChoose.getChildAt(i).setSelected(false);
+							} else {
+								v.setSelected(true);
+								selectTab(i, false);
+							}
+						}
+					}
+				});
+				mColumnChoose.addView(columnTextView, i, params);
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	private void disableCategoryScrollReside() {
+		ResideMenu resideMenu = ((MainActivity_) getActivity()).getResideMenu();
+		resideMenu.addIgnoredView(channelColumn);
+	}
+
+	private void selectTab(int tab_index, boolean setTabStyle) {
+		currentSelectedColumn = tab_index;
+		View checkView = mColumnChoose.getChildAt(tab_index);
+		int l = checkView.getMeasuredWidth();
+		int k = checkView.getLeft();
+		int ll = k + l / 2 - mScreenWidth / 2;
+		mColumnHorizontalScrollView.smoothScrollTo(ll, 0);
+		if (setTabStyle) {
+			for (int i = 0; i < mColumnChoose.getChildCount(); i++) {
+				View view = mColumnChoose.getChildAt(i);
+				boolean isCheck = false;
+				if (i == tab_index) {
+					isCheck = true;
+				}
+				view.setSelected(isCheck);
+			}
 		}
 	}
 }
