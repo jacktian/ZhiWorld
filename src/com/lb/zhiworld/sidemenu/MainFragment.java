@@ -26,9 +26,37 @@ import com.lb.zhiworld.activity.MainActivity_;
 import com.lb.zhiworld.adapter.NewsFragmentPagerAdapter;
 import com.lb.zhiworld.bean.ChannelItem;
 import com.lb.zhiworld.channel.ChannelManage;
+import com.lb.zhiworld.fragment.BLZFragment_;
+import com.lb.zhiworld.fragment.BeiJingFragment_;
+import com.lb.zhiworld.fragment.BlogsFragment_;
+import com.lb.zhiworld.fragment.CBAFragment_;
+import com.lb.zhiworld.fragment.CarFragment_;
+import com.lb.zhiworld.fragment.DigitalFragment_;
+import com.lb.zhiworld.fragment.EconomicFragment_;
+import com.lb.zhiworld.fragment.EducationFragment_;
+import com.lb.zhiworld.fragment.EmotionFragment_;
 import com.lb.zhiworld.fragment.EntertainmentFragment_;
+import com.lb.zhiworld.fragment.EstateFragment_;
+import com.lb.zhiworld.fragment.FashionFragment_;
 import com.lb.zhiworld.fragment.FootballFragment_;
+import com.lb.zhiworld.fragment.ForumFragment_;
+import com.lb.zhiworld.fragment.GameFragment_;
+import com.lb.zhiworld.fragment.HomeFurnishingFragment_;
+import com.lb.zhiworld.fragment.JokeFragment_;
+import com.lb.zhiworld.fragment.LotteryFragment_;
+import com.lb.zhiworld.fragment.MilitaryFragment_;
+import com.lb.zhiworld.fragment.MobileFragment_;
+import com.lb.zhiworld.fragment.MovieFragment_;
+import com.lb.zhiworld.fragment.NBAFragment_;
+import com.lb.zhiworld.fragment.ParentChildrenFragment_;
+import com.lb.zhiworld.fragment.PhoneFragment_;
+import com.lb.zhiworld.fragment.RadioFragment_;
+import com.lb.zhiworld.fragment.SelectionFragment_;
+import com.lb.zhiworld.fragment.SocietyFragment_;
+import com.lb.zhiworld.fragment.SportFragment_;
+import com.lb.zhiworld.fragment.TechnologyFragment_;
 import com.lb.zhiworld.fragment.TopFragment_;
+import com.lb.zhiworld.fragment.TravelFragment_;
 import com.lb.zhiworld.utils.BaseTools;
 import com.lb.zhiworld.widget.ColumnHorizontalScrollView;
 import com.special.ResideMenu.ResideMenu;
@@ -155,6 +183,62 @@ public class MainFragment extends Fragment {
 			mFragment = new FootballFragment_();
 		} else if (channelName.equals("娱乐")) {
 			mFragment = new EntertainmentFragment_();
+		} else if (channelName.equals("体育")) {
+			mFragment = new SportFragment_();
+		} else if (channelName.equals("财经")) {
+			mFragment = new EconomicFragment_();
+		} else if (channelName.equals("科技")) {
+			mFragment = new TechnologyFragment_();
+		} else if (channelName.equals("电影")) {
+			mFragment = new MovieFragment_();
+		} else if (channelName.equals("NBA")) {
+			mFragment = new NBAFragment_();
+		} else if (channelName.equals("数码")) {
+			mFragment = new DigitalFragment_();
+		} else if (channelName.equals("移动")) {
+			mFragment = new MobileFragment_();
+		} else if (channelName.equals("彩票")) {
+			mFragment = new LotteryFragment_();
+		} else if (channelName.equals("教育")) {
+			mFragment = new EducationFragment_();
+		} else if (channelName.equals("论坛")) {
+			mFragment = new ForumFragment_();
+		} else if (channelName.equals("亲子")) {
+			mFragment = new ParentChildrenFragment_();
+		} else if (channelName.equals("CBA")) {
+			mFragment = new CBAFragment_();
+		} else if (channelName.equals("笑话")) {
+			mFragment = new JokeFragment_();
+		} else if (channelName.equals("汽车")) {
+			mFragment = new CarFragment_();
+		} else if (channelName.equals("时尚")) {
+			mFragment = new FashionFragment_();
+		} else if (channelName.equals("北京")) {
+			mFragment = new BeiJingFragment_();
+		} else if (channelName.equals("军事")) {
+			mFragment = new MilitaryFragment_();
+		} else if (channelName.equals("房产")) {
+			mFragment = new EstateFragment_();
+		} else if (channelName.equals("游戏")) {
+			mFragment = new GameFragment_();
+		} else if (channelName.equals("精选")) {
+			mFragment = new SelectionFragment_();
+		} else if (channelName.equals("电台")) {
+			mFragment = new RadioFragment_();
+		} else if (channelName.equals("情感")) {
+			mFragment = new EmotionFragment_();
+		} else if (channelName.equals("旅游")) {
+			mFragment = new TravelFragment_();
+		} else if (channelName.equals("手机")) {
+			mFragment = new PhoneFragment_();
+		} else if (channelName.equals("博客")) {
+			mFragment = new BlogsFragment_();
+		} else if (channelName.equals("社会")) {
+			mFragment = new SocietyFragment_();
+		} else if (channelName.equals("家居")) {
+			mFragment = new HomeFurnishingFragment_();
+		} else if (channelName.equals("暴雪")) {
+			mFragment = new BLZFragment_();
 		}
 		return mFragment;
 	}
@@ -187,15 +271,16 @@ public class MainFragment extends Fragment {
 		@Override
 		public void onPageSelected(int arg0) {
 			selectTab(arg0, true);
+			if (arg0 == 0) {
+				resideMenu.removeIgnoredView(mViewPager);
+			} else {
+				resideMenu.removeIgnoredView(mViewPager);
+				resideMenu.addIgnoredView(mViewPager);
+			}
 		}
 
 		@Override
 		public void onPageScrolled(int arg0, float arg1, int arg2) {
-			if (arg0 == 0) {
-				resideMenu.removeIgnoredView(mViewPager);
-			} else {
-				resideMenu.addIgnoredView(mViewPager);
-			}
 		}
 
 		@Override
