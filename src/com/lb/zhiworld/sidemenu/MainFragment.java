@@ -1,4 +1,4 @@
-package com.lb.zhiworld.fragment;
+package com.lb.zhiworld.sidemenu;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,6 +10,7 @@ import org.androidannotations.annotations.ViewById;
 
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
+import android.support.v4.view.ViewPager.OnPageChangeListener;
 import android.view.Gravity;
 import android.view.View;
 import android.view.WindowManager;
@@ -22,13 +23,17 @@ import android.widget.TextView;
 import com.lb.zhiworld.App;
 import com.lb.zhiworld.R;
 import com.lb.zhiworld.activity.MainActivity_;
+import com.lb.zhiworld.adapter.NewsFragmentPagerAdapter;
 import com.lb.zhiworld.bean.ChannelItem;
 import com.lb.zhiworld.channel.ChannelManage;
+import com.lb.zhiworld.fragment.EntertainmentFragment_;
+import com.lb.zhiworld.fragment.FootballFragment_;
+import com.lb.zhiworld.fragment.TopFragment_;
 import com.lb.zhiworld.utils.BaseTools;
 import com.lb.zhiworld.widget.ColumnHorizontalScrollView;
 import com.special.ResideMenu.ResideMenu;
 
-@EFragment(R.layout.fragment_main)
+@EFragment(R.layout.fragment_reside_main)
 public class MainFragment extends Fragment {
 	@ViewById(R.id.mColumnHorizontalScrollView)
 	ColumnHorizontalScrollView mColumnHorizontalScrollView;
@@ -46,6 +51,7 @@ public class MainFragment extends Fragment {
 	ImageView rightShadow;
 	@ViewById(R.id.mViewPager)
 	ViewPager mViewPager;
+	private ResideMenu resideMenu;
 	// 屏幕宽度
 	private int mScreenWidth;
 	// column宽度
@@ -54,6 +60,10 @@ public class MainFragment extends Fragment {
 	private int currentSelectedColumn = 0;
 	// 用户选择新闻列表
 	private List<ChannelItem> userChannelList;
+	// 用户选择新闻列表对应的页面
+	private ArrayList<Fragment> fragments;
+	private Fragment mFragment;
+	private NewsFragmentPagerAdapter mAdapter;
 
 	@AfterInject
 	void init() {
@@ -63,12 +73,15 @@ public class MainFragment extends Fragment {
 		mScreenWidth = BaseTools.getWindowWidth(getActivity());
 		mItemWidth = mScreenWidth / 7;
 		userChannelList = new ArrayList<ChannelItem>();
+		fragments = new ArrayList<Fragment>();
 	}
 
 	@AfterViews
 	void initView() {
+		resideMenu = ((MainActivity_) getActivity()).getResideMenu();
 		disableCategoryScrollReside();
 		initColumns();
+		initFragments();
 	}
 
 	@SuppressWarnings("deprecation")
@@ -109,6 +122,7 @@ public class MainFragment extends Fragment {
 							} else {
 								v.setSelected(true);
 								selectTab(i, false);
+								mViewPager.setCurrentItem(i);
 							}
 						}
 					}
@@ -120,9 +134,29 @@ public class MainFragment extends Fragment {
 		}
 	}
 
-	private void disableCategoryScrollReside() {
-		ResideMenu resideMenu = ((MainActivity_) getActivity()).getResideMenu();
-		resideMenu.addIgnoredView(channelColumn);
+	@SuppressWarnings("deprecation")
+	private void initFragments() {
+		fragments.clear();
+		for (int i = 0; i < userChannelList.size(); i++) {
+			String channelName = userChannelList.get(i).getName();
+			fragments.add(initFragment(channelName));
+		}
+		mAdapter = new NewsFragmentPagerAdapter(getChildFragmentManager(),
+				fragments);
+		mViewPager.setOffscreenPageLimit(1);
+		mViewPager.setAdapter(mAdapter);
+		mViewPager.setOnPageChangeListener(mListener);
+	}
+
+	private Fragment initFragment(String channelName) {
+		if (channelName.equals("头条")) {
+			mFragment = new TopFragment_();
+		} else if (channelName.equals("足球")) {
+			mFragment = new FootballFragment_();
+		} else if (channelName.equals("娱乐")) {
+			mFragment = new EntertainmentFragment_();
+		}
+		return mFragment;
 	}
 
 	private void selectTab(int tab_index, boolean setTabStyle) {
@@ -143,4 +177,29 @@ public class MainFragment extends Fragment {
 			}
 		}
 	}
+
+	private void disableCategoryScrollReside() {
+		resideMenu.addIgnoredView(channelColumn);
+	}
+
+	private OnPageChangeListener mListener = new ViewPager.OnPageChangeListener() {
+
+		@Override
+		public void onPageSelected(int arg0) {
+			selectTab(arg0, true);
+		}
+
+		@Override
+		public void onPageScrolled(int arg0, float arg1, int arg2) {
+			if (arg0 == 0) {
+				resideMenu.removeIgnoredView(mViewPager);
+			} else {
+				resideMenu.addIgnoredView(mViewPager);
+			}
+		}
+
+		@Override
+		public void onPageScrollStateChanged(int arg0) {
+		}
+	};
 }

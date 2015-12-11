@@ -1,12 +1,12 @@
-package com.lb.zhiworld.fragment;
+package com.lb.zhiworld.sidemenu;
 
 import org.androidannotations.annotations.EFragment;
 
-import com.lb.zhiworld.R;
-
 import android.support.v4.app.Fragment;
 
-@EFragment(R.layout.fragment_weather)
+import com.lb.zhiworld.R;
+
+@EFragment(R.layout.fragment_reside_weather)
 public class WeatherFragment extends Fragment {
 
 }

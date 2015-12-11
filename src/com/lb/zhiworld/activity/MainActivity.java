@@ -9,10 +9,10 @@ import android.support.v4.app.FragmentTransaction;
 import android.view.View;
 
 import com.lb.zhiworld.R;
-import com.lb.zhiworld.fragment.MainFragment_;
-import com.lb.zhiworld.fragment.PictureFragment_;
-import com.lb.zhiworld.fragment.VideoFragment_;
-import com.lb.zhiworld.fragment.WeatherFragment_;
+import com.lb.zhiworld.sidemenu.MainFragment_;
+import com.lb.zhiworld.sidemenu.PictureFragment_;
+import com.lb.zhiworld.sidemenu.VideoFragment_;
+import com.lb.zhiworld.sidemenu.WeatherFragment_;
 import com.special.ResideMenu.ResideMenu;
 import com.special.ResideMenu.ResideMenuItem;
 

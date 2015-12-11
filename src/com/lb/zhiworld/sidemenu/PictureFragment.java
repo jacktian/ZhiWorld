@@ -1,12 +1,12 @@
-package com.lb.zhiworld.fragment;
+package com.lb.zhiworld.sidemenu;
 
 import org.androidannotations.annotations.EFragment;
 
-import com.lb.zhiworld.R;
-
 import android.support.v4.app.Fragment;
 
-@EFragment(R.layout.fragment_picture)
+import com.lb.zhiworld.R;
+
+@EFragment(R.layout.fragment_reside_picture)
 public class PictureFragment extends Fragment {
 
 }

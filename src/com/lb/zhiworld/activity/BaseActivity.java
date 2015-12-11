@@ -5,6 +5,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
 
+import com.lb.zhiworld.utils.CacheUtil;
+import com.lb.zhiworld.utils.StringUtils;
 import com.lb.zhiworld.widget.slidingactivity.IntentUtils;
 import com.lb.zhiworld.widget.slidingactivity.SlidingActivity;
 
@@ -40,6 +42,27 @@ public class BaseActivity extends SlidingActivity {
 		} else {
 			IntentUtils.startPreviewActivity(this, intent, requestCode);
 		}
+	}
+
+	/**
+	 * 设置缓存数据
+	 * 
+	 * @param key
+	 * @param value
+	 */
+	public void setCacheStr(String key, String value) {
+		if (!StringUtils.isEmpty(value)) {
+			CacheUtil.get(this).put(key, value);
+		}
+	}
+
+	/**
+	 * 获取缓存数据
+	 * 
+	 * @param key
+	 */
+	public String getCacheStr(String key) {
+		return CacheUtil.get(this).getAsString(key);
 	}
 
 	/**
