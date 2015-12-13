@@ -19,14 +19,6 @@ public class NewsFragmentPagerAdapter extends FragmentPagerAdapter {
 		this.fragments = fragments;
 	}
 
-	// public void appendList(List<Fragment> fragmentList) {
-	// fragments.clear();
-	// if (!fragments.containsAll(fragmentList) && fragmentList != null) {
-	// fragments.addAll(fragmentList);
-	// }
-	// notifyDataSetChanged();
-	// }
-
 	@Override
 	public Fragment getItem(int arg0) {
 		return fragments.get(arg0);
